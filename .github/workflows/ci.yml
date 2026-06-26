@@ -1,0 +1,67 @@
+name: Daily header update
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate header to temp.h
+        shell: pwsh
+        run: ./generate-header.ps1 ${{ secrets.GITHUB_TOKEN }} temp.h
+
+      - name: Compare
+        id: check
+        shell: pwsh
+        run: |
+          $headersFile = "clear_all_cpp_std_headers.h"
+          $tempFile = "temp.h"
+          $changed = $false
+          if (-not (Test-Path $headersFile)) {
+              $changed = $true
+          } else {
+              $headers = Get-Content $headersFile | Select-Object -Skip 5
+              $temp = Get-Content $tempFile | Select-Object -Skip 5
+              if (Compare-Object $headers $temp) {
+                  $changed = $true
+              }
+          }
+          if ($changed) {
+              "changed=true" >> $env:GITHUB_OUTPUT
+          } else {
+              "changed=false" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Commit and push
+        if: steps.check.outputs.changed == 'true'
+        shell: pwsh
+        run: |
+          git config user.name "YexuanXiao [bot]"
+          git config user.email "bizwen.noreply@nykz.org"
+          Copy-Item temp.h clear_all_cpp_std_headers.h
+          git add clear_all_cpp_std_headers.h
+          $date = Get-Date -Format "yyyy-MM-dd"
+          git commit -m $date
+          git push
+
+      - name: Create Release
+        if: steps.check.outputs.changed == 'true'
+        shell: pwsh
+        run: |
+          $TAG = Get-Date -Format "yyyy-MM-dd"
+          git tag $TAG
+          git push origin $TAG
+          gh release create $TAG --title $TAG ./clear_all_cpp_std_headers.h
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
