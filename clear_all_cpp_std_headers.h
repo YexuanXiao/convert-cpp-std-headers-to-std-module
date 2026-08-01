@@ -1,7 +1,7 @@
 /*
- * Generated at: 2026-06-26 14:44:20 UTC
- * GCC commit: d6cecdd745c0d3319bdecf98ba897284627c08af
- * LLVM commit: 94b5b37b439e1d9d4e9ad065949f52888ca75a30
+ * Generated at: 2026-08-01 09:40:51 UTC
+ * GCC commit: a6ceb8bca802db02edddbebfe2dbf589e5710fc5
+ * LLVM commit: 232e8b5f458479163340ae2d9c1925ccaaaa154b
  */
 
 #ifndef _GLIBCXX_CCOMPLEX
@@ -23,7 +23,7 @@
 #define _GLIBCXX_CINTTYPES 1
 #endif
 #ifndef _GLIBCXX_CISO646
-#define _GLIBCXX_CISO646 1
+#define _GLIBCXX_CISO646
 #endif
 #ifndef _GLIBCXX_CLIMITS
 #define _GLIBCXX_CLIMITS 1
@@ -78,6 +78,21 @@
 #endif
 #ifndef _GLIBCXX_CWCTYPE
 #define _GLIBCXX_CWCTYPE 1
+#endif
+#ifndef _COMPARE
+#define _COMPARE
+#endif
+#ifndef __EXCEPTION__
+#define __EXCEPTION__
+#endif
+#ifndef _INITIALIZER_LIST
+#define _INITIALIZER_LIST
+#endif
+#ifndef _NEW
+#define _NEW
+#endif
+#ifndef _TYPEINFO
+#define _TYPEINFO
 #endif
 #ifndef _GLIBCXX_ALGORITHM
 #define _GLIBCXX_ALGORITHM 1
@@ -134,7 +149,7 @@
 #define _GLIBCXX_EXECUTION 1
 #endif
 #ifndef _GLIBCXX_EXPECTED
-#define _GLIBCXX_EXPECTED 1
+#define _GLIBCXX_EXPECTED
 #endif
 #ifndef _GLIBCXX_FILESYSTEM
 #define _GLIBCXX_FILESYSTEM 1
@@ -161,7 +176,7 @@
 #define _GLIBCXX_FUTURE 1
 #endif
 #ifndef _GLIBCXX_GENERATOR
-#define _GLIBCXX_GENERATOR 1
+#define _GLIBCXX_GENERATOR
 #endif
 #ifndef _GLIBCXX_INPLACE_VECTOR
 #define _GLIBCXX_INPLACE_VECTOR 1
@@ -284,7 +299,7 @@
 #define _GLIBCXX_STDFLOAT 1
 #endif
 #ifndef _GLIBCXX_STOP_TOKEN
-#define _GLIBCXX_STOP_TOKEN 1
+#define _GLIBCXX_STOP_TOKEN
 #endif
 #ifndef _GLIBXX_STREAMBUF
 #define _GLIBXX_STREAMBUF 1
@@ -302,7 +317,7 @@
 #define _GLIBCXX_SYSTEM_ERROR 1
 #endif
 #ifndef _GLIBCXX_TEXT_ENCODING
-#define _GLIBCXX_TEXT_ENCODING 1
+#define _GLIBCXX_TEXT_ENCODING
 #endif
 #ifndef _GLIBCXX_THREAD
 #define _GLIBCXX_THREAD 1
@@ -335,7 +350,7 @@
 #define _GLIBCXX_VECTOR 1
 #endif
 #ifndef _GLIBCXX_VERSION_INCLUDED
-#define _GLIBCXX_VERSION_INCLUDED 1
+#define _GLIBCXX_VERSION_INCLUDED
 #endif
 #ifndef _LIBCPP_ALGORITHM
 #define _LIBCPP_ALGORITHM
@@ -665,3 +680,4 @@
 #undef _STL_COMPILER_PREPROCESSOR
 #endif
 #define _STL_COMPILER_PREPROCESSOR 0
+
