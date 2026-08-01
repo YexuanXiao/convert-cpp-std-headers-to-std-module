@@ -61,6 +61,12 @@ $dirs = @(
         Repo = $gccRepo
     },
     @{
+        ApiUrl = "https://api.github.com/repos/$gccRepo/contents/libstdc++-v3/libsupc++?ref=$gccCommit"
+        IsGcc = $true
+        Commit = $gccCommit
+        Repo = $gccRepo
+    },
+    @{
         ApiUrl = "https://api.github.com/repos/$gccRepo/contents/libstdc++-v3/include/std?ref=$gccCommit"
         IsGcc = $true
         Commit = $gccCommit
@@ -128,17 +134,12 @@ foreach ($file in $allFiles) {
     $lines = $content -split "`n"
     $found = $false
     foreach ($line in $lines) {
-        if ($line -match '^\s*#ifndef\s+([A-Za-z_]\w*)') {
-            $macro = $matches[1]
-            if ($file.IsGcc) {
-                $outputLines.Add("#ifndef $macro")
-                $outputLines.Add("#define $macro 1")
-                $outputLines.Add("#endif")
-            } else {
-                $outputLines.Add("#ifndef $macro")
-                $outputLines.Add("#define $macro")
-                $outputLines.Add("#endif")
-            }
+        if ($line -cmatch '^\s*#define\s+([A-Za-z_]\w*)(.*)$') {
+            $name = $matches[1]
+            $value = $matches[2].Trim()
+            $outputLines.Add("#ifndef $name")
+            $outputLines.Add("#define $name$(if ($value) { " $value" })")
+            $outputLines.Add("#endif")
             $found = $true
             break
         }
@@ -154,6 +155,7 @@ $outputLines.Add("#ifdef _STL_COMPILER_PREPROCESSOR")
 $outputLines.Add("#undef _STL_COMPILER_PREPROCESSOR")
 $outputLines.Add("#endif")
 $outputLines.Add("#define _STL_COMPILER_PREPROCESSOR 0")
+$outputLines.Add("")
 
 [System.IO.File]::WriteAllLines($OutputFile, $outputLines, [System.Text.UTF8Encoding]::new($false))
 
