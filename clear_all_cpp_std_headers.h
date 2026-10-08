@@ -1,7 +1,7 @@
 /*
- * Generated at: 2026-08-01 09:40:51 UTC
- * GCC commit: a6ceb8bca802db02edddbebfe2dbf589e5710fc5
- * LLVM commit: 232e8b5f458479163340ae2d9c1925ccaaaa154b
+ * Generated at: 2026-10-08 05:18:52 UTC
+ * GCC commit: 13ecbd80dbfce33f443950c593c9c6be0766f410
+ * LLVM commit: 6a5b8dc0dedf192fe203c9a4fc79ed61bbb9fac4
  */
 
 #ifndef _GLIBCXX_CCOMPLEX
@@ -471,6 +471,9 @@
 #endif
 #ifndef _LIBCPP_CWCTYPE
 #define _LIBCPP_CWCTYPE
+#endif
+#ifndef _LIBCPP_DEBUGGING
+#define _LIBCPP_DEBUGGING
 #endif
 #ifndef _LIBCPP_DEQUE
 #define _LIBCPP_DEQUE
